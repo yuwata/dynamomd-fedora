@@ -3,7 +3,7 @@
 
 Name:           dynamomd
 Version:        1.7.4364
-Release:        1%{?commit:.git%{commitshort}}%{?dist}
+Release:        2%{?commit:.git%{commitshort}}%{?dist}
 Summary:        Event-driven particle simulation sofware
 
 License:        unknown
@@ -15,20 +15,19 @@ Patch0001:      0001-cmake-add-usr-lib64-to-search-list-of-cairommconfig..patch
 %global num_patches %{lua: c=0; for i,p in ipairs(patches) do c=c+1; end; print(c);}
 
 BuildRequires:  python
-BuildRequires:  bzip2-devel
 BuildRequires:  boost-devel
 BuildRequires:  boost-static
-BuildRequires:  freeglut-devel
+BuildRequires:  bzip2-devel
 BuildRequires:  Judy-devel
-BuildRequires:  libpng-devel
-BuildRequires:  glew-devel
-BuildRequires:  gtkmm30-devel
-BuildRequires:  libXmu-devel
-BuildRequires:  cairomm-devel
-BuildRequires:  ffmpeg-devel
+#BuildRequires:  cairomm-devel
+#BuildRequires:  ffmpeg-devel
+#BuildRequires:  freeglut-devel
+#BuildRequires:  glew-devel
+#BuildRequires:  gtkmm30-devel
+#BuildRequires:  libpng-devel
+#BuildRequires:  libXmu-devel
 
 BuildRequires:  cmake
-BuildRequires:  doxygen
 BuildRequires:  git
 
 Provides:  %{name} = %{version}-%{release}
@@ -61,7 +60,7 @@ popd
 rm -f %{buildroot}%{_datadir}/doc/dynamomd/copyright
 
 %check
-#%make_test -C build
+# skip tests as they take so long time...
 #make test -C build
 
 %files
@@ -69,5 +68,8 @@ rm -f %{buildroot}%{_datadir}/doc/dynamomd/copyright
 %{_bindir}/*
 
 %changelog
+* Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-2.gita735bfb
+- do not build visualiser
+
 * Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-1.gita735bfb
 - Initial release
