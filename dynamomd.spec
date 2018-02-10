@@ -1,4 +1,4 @@
-%global gitcommit a735bfbfb2e23a3817086c24d4d80ac539058967
+%global gitcommit 03563cde8a3504ae602ff1a2b67b7831e599ee66
 %{?gitcommit:%global gitcommitshort %(c=%{gitcommit}; echo ${c:0:7})}
 
 Name:           dynamomd
@@ -10,15 +10,14 @@ License:        unknown
 URL:            http://dynamomd.org/
 Source0:        https://github.com/toastedcrumpets/DynamO/archive/%{?gitcommit}.tar.gz#/%{name}-%{gitcommitshort}.tar.gz
 
-Patch0001:      0001-cmake-add-usr-lib64-to-search-list-of-cairommconfig..patch
-
-%global num_patches %{lua: c=0; for i,p in ipairs(patches) do c=c+1; end; print(c);}
-
+BuildRequires:  cmake
 BuildRequires:  python
 BuildRequires:  boost-devel
 BuildRequires:  boost-static
 BuildRequires:  bzip2-devel
 BuildRequires:  Judy-devel
+
+# required for dynamo visualizer
 #BuildRequires:  cairomm-devel
 #BuildRequires:  ffmpeg-devel
 #BuildRequires:  freeglut-devel
@@ -27,9 +26,6 @@ BuildRequires:  Judy-devel
 #BuildRequires:  libpng-devel
 #BuildRequires:  libXmu-devel
 
-BuildRequires:  cmake
-BuildRequires:  git
-
 Provides:  %{name} = %{version}-%{release}
 
 %description
@@ -37,15 +33,6 @@ Provides:  %{name} = %{version}-%{release}
 
 %prep
 %setup -q -n DynamO-%{gitcommit}
-%if %{num_patches}
-git init
-git config user.email "watanabe.yu@gmail.com"
-git config user.name "Yu Watanabe"
-git add .
-git commit -a -q -m "%{version} baseline."
-# Apply all the patches.
-git am %{patches}
-%endif
 
 %build
 mkdir build
@@ -68,8 +55,11 @@ rm -f %{buildroot}%{_datadir}/doc/dynamomd/copyright
 %{_bindir}/*
 
 %changelog
+* Thu Feb 10 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-3.git03563cd
+- Update to upstream snapshot 03563cde8a3504ae602ff1a2b67b7831e599ee66
+
 * Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-2.gita735bfb
-- do not build visualiser
+- do not build visualizer
 
 * Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-1.gita735bfb
 - Initial release
