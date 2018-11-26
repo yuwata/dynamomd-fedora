@@ -6,7 +6,7 @@ Version:        1.7.4
 Release:        1%{?commit:.git%{commitshort}}%{?dist}
 Summary:        Event-driven particle simulation sofware
 
-License:        unknown
+License:        GPLv3
 URL:            http://dynamomd.org/
 Source0:        https://github.com/toastedcrumpets/DynamO/archive/%{gitcommit}/%{name}-%{gitcommitshort}.tar.gz
 
