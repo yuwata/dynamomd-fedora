@@ -1,16 +1,17 @@
-%global gitcommit 03563cde8a3504ae602ff1a2b67b7831e599ee66
+%global gitcommit 8d6f9d43f9b8fe714d5699971cc114f5d2bf5df8
 %{?gitcommit:%global gitcommitshort %(c=%{gitcommit}; echo ${c:0:7})}
 
 Name:           dynamomd
-Version:        1.7.4364
-Release:        2%{?commit:.git%{commitshort}}%{?dist}
+Version:        1.7.4
+Release:        1%{?commit:.git%{commitshort}}%{?dist}
 Summary:        Event-driven particle simulation sofware
 
 License:        unknown
 URL:            http://dynamomd.org/
-Source0:        https://github.com/toastedcrumpets/DynamO/archive/%{?gitcommit}.tar.gz#/%{name}-%{gitcommitshort}.tar.gz
+Source0:        https://github.com/toastedcrumpets/DynamO/archive/%{gitcommit}/%{name}-%{gitcommitshort}.tar.gz
 
 BuildRequires:  cmake
+BuildRequires:  gcc-c++
 BuildRequires:  python
 BuildRequires:  boost-devel
 BuildRequires:  boost-static
@@ -55,11 +56,14 @@ rm -f %{buildroot}%{_datadir}/doc/dynamomd/copyright
 %{_bindir}/*
 
 %changelog
-* Thu Feb 10 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-3.git03563cd
+* Mon Nov 26 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4-1.git8d6f9d4
+- Update to latest git snapshot 8d6f9d43f9b8fe714d5699971cc114f5d2bf5df8
+
+* Sat Feb 10 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7-3.git03563cd
 - Update to upstream snapshot 03563cde8a3504ae602ff1a2b67b7831e599ee66
 
-* Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-2.gita735bfb
+* Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7-2.gita735bfb
 - do not build visualizer
 
-* Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7.4364-1.gita735bfb
+* Thu Feb 08 2018 Yu Watanabe <watanabe.yu@gmail.com> - 1.7-1.gita735bfb
 - Initial release
